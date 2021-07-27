@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <title> Memento, quick launch your notes to the clipboard! 🚀 - Edi Piqoni</title>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
+
+
+      <link href='http://fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
+      <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
+      <link rel="stylesheet" type="text/css" href="/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="/theme/css/styles.css"/>
+      <meta charset="utf-8" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href="">Edi Piqoni</a></h1>
+        <h3 class ="sitesubtitle"></h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">Blog</a></li>
+              <li><a class="nodec" href="/photography/">Photography</a></li>
+              <li><a class="nodec" href="/music/">Music</a></li>
+              <li><a class="nodec" href="/about/">About</a></li>
+            <!--pages-->
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:piqoni@gmail.com"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/memento-quick-launch-your-notes-to-the-clipboard.html" rel="bookmark" title="Permalink to Memento, quick launch your notes to the clipboard! 🚀">
+      Memento, quick launch your notes to the clipboard! 🚀
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2017-09-10T00:00:00+02:00">
+      Sun 10 September 2017
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>If you're in a profession that requires you to frequently retrieve a lot of hard-to-remember text information/snippets/commands then you probably use a note keeping desktop or web app. I mostly use <a href="https://workflowy.com" target="_blank">Workflowvy</a> for work and <a href="https://simplenote.com/" target="_blank">Simplenote</a> for personal stuff. They are great at <strong>writing notes</strong> (nice UI, categorization and such) but what they usually lack is the <strong>retrieving part</strong>. </p>
+<p><img src="assets/tar.png"></p>
+<p>In my workflow, I write the note once, and I have to retrieve it many many times. So, the retrieving part should be <em>way faster</em> and doesn't necessarily need to have the same UI as adding them (if speed is compromised by doing that).</p>
+<p>Steps to get a note from Workflovy (or similar apps):</p>
+<div class="highlight"><pre><span></span>1. Grab mouse, click Workflovy bookmark, or tab having Workflovy. 
+2. Click Search textfield
+3. Write search keyword
+4. Double click to select the text of note that I want to copy (most common scenario for me)
+5. Ctrl + C to copy it the clipboard
+6. Close Workflovy, or switch view with ALT + TAB, and continue work.
+7. Rethink all your life decisions (optional)
+</pre></div>
+
+
+<p>What I believe the ideal UX for note retrieving should be:</p>
+<div class="highlight"><pre><span></span>1. &quot;CTRL + ~&quot; or any other keyboard shortcut to open a search interface (so mouseless)
+2. Write search keyword (while writing, matching note should be autoselected)
+3. Press Enter (app closes, and content is added to clipboard automatically, continue work)
+</pre></div>
+
+
+<p>So, yesterday I wrote an early prototype called <a href="https://github.com/piqoni/memento" target="_blank">Memento</a> that follows this second approach for retrieving notes. I exported my Workflowy notes to CSV so Memento can read them, and I'll start using it and see how it goes. If I find it useful, I might continue improving and polishing it a bit since desktop development is not really my expertise at the moment.  </p>
+<p>Source Code and Installation guide: <a href="https://github.com/piqoni/memento" target="_blank">Memento</a></p>
+<p><img  style="max-width: 100%" src="https://user-images.githubusercontent.com/3144671/30245112-f7d8a8ce-95cf-11e7-8d8d-065b2f81a571.png"></p>
+  </div><!-- .content -->
+
+</section>
+
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Edi Piqoni
+      </p>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63446124-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

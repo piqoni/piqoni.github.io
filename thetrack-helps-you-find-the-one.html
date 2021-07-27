@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <title> theTrack, helps you find the one. - Edi Piqoni</title>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
+
+
+      <link href='http://fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
+      <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
+      <link rel="stylesheet" type="text/css" href="/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="/theme/css/styles.css"/>
+      <meta charset="utf-8" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href="">Edi Piqoni</a></h1>
+        <h3 class ="sitesubtitle"></h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">Blog</a></li>
+              <li><a class="nodec" href="/photography/">Photography</a></li>
+              <li><a class="nodec" href="/music/">Music</a></li>
+              <li><a class="nodec" href="/about/">About</a></li>
+            <!--pages-->
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:piqoni@gmail.com"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/thetrack-helps-you-find-the-one.html" rel="bookmark" title="Permalink to theTrack, helps you find the one.">
+      theTrack, helps you find the one.
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-09-05T00:00:00+02:00">
+      Sat 05 September 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>Last weekend I started working on <a href="https://github.com/piqoni/thetrack" target="_blank">theTrack</a>, a very fun project which involved Flask, Python and music, a wonderful combination in its own right.</p>
+<p>Basically, theTrack is a web app that given the artist name, will try to find their "best" track. It uses Soundcloud data such as number of plays, comments and favorites to calculate a rank for each track.</p>
+<p>I came up with the following formula to calculate a rank:</p>
+<div class="highlight"><pre><span></span>rank = (number_of_favorites / total_plays) + ((number_of_comments * 2) / total_plays)
+</pre></div>
+
+
+<p>So far, I've seen good results, and it has helped me find great tracks when discovering new and unknown artists. Though, it is important to note that in order for the result to make sense, the artist should have a Soundcloud channel.</p>
+<p>Running Demo: <a href="https://thetrack.pythonanywhere.com" target="_blank">thetrack.pythonanywhere.com</a></p>
+<p>Source Code: <a href="https://github.com/piqoni/thetrack" target="_blank">Github</a></p>
+<p><img src="assets/thetrack.png"></p>
+  </div><!-- .content -->
+
+</section>
+
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Edi Piqoni
+      </p>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63446124-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instance IDs</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        /* Define CSS styles for status */
+        .status-severe {
+            color: red !important;
+            font-weight: bold;
+        }
+        .status-running {
+            color: green !important;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center"><h1 class="center">Beanstalk Health Dashboard</h1></div>
+    <div class="container text-center mt-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Instance Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Server rows will be dynamically generated here -->
+            </tbody>
+        </table>
+        <button id="terminateButton" class="btn btn-danger">Terminate Instance</button>
+        <div id="runningCount" class="mt-3">Running Servers: 0</div>
+        <div id="pointsDisplay" class="mt-3">Points: 0</div>
+    </div>
+
+    <script>
+        let servers = [
+            { id: 1, instanceName: "Server 1", status: "Severe" },
+            { id: 2, instanceName: "Server 2", status: "Severe" },
+            { id: 3, instanceName: "Server 3", status: "Severe" },
+            { id: 4, instanceName: "Server 4", status: "Running" },
+            { id: 5, instanceName: "Server 5", status: "Running" },
+            { id: 6, instanceName: "Server 6", status: "Running" },
+            { id: 7, instanceName: "Server 7", status: "Running" },
+            { id: 8, instanceName: "Server 8", status: "Running" }
+        ];
+
+        let points = 0;
+        let isGameOver = false;
+
+        // Function to update the running server count and points
+        function updateRunningCountAndPoints() {
+            const runningServers = servers.filter(server => server.status === "Running");
+            const runningCount = runningServers.length;
+            document.getElementById("runningCount").textContent = `Running Servers: ${runningCount}`;
+
+            if (!isGameOver) {
+                points += runningCount * 5;
+                document.getElementById("pointsDisplay").textContent = `Points: ${points}`;
+            }
+
+            // Check if all servers are in "Severe" state
+            if (runningCount === 0 && servers.every(server => server.status === "Severe")) {
+                isGameOver = true;
+                alert(`Game Over! Your final score is ${points} points.`);
+            }
+        }
+
+        // Function to initialize the table with instance names and statuses
+        function initializeTable() {
+            const tbody = document.querySelector('tbody');
+            servers.forEach(server => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="radio" name="instance" value="${server.id}"></td>
+                    <td id="instance${server.id}">${server.instanceName}</td>
+                    <td id="status${server.id}" class="status-${server.status.toLowerCase()}">${server.status}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+// Function to change the status to "Severe" for running servers
+function changeStatusToSevere() {
+    if (!isGameOver) {
+        // Check if all servers are in "Severe" state
+        if (servers.every(server => server.status === "Severe")) {
+            isGameOver = true;
+            alert(`Game Over! Your final score is ${points} points.`);
+            return; // End the function
+        }
+
+        const runningServers = servers.filter(server => server.status === "Running");
+        const randomServers = [];
+        const numServersToChange = Math.min(Math.floor(Math.random() * 9) + 3, runningServers.length); // 1 to 5 servers
+
+        for (let i = 0; i < numServersToChange; i++) {
+            const randomIndex = Math.floor(Math.random() * runningServers.length);
+            const serverToChange = runningServers.splice(randomIndex, 1)[0];
+            serverToChange.status = "Severe";
+            randomServers.push(serverToChange);
+        }
+
+        // Update the table with the new status
+        randomServers.forEach(serverToChange => {
+            const instanceId = serverToChange.id;
+            const statusCell = document.getElementById(`status${instanceId}`);
+
+            // Check if the element exists before updating it
+            if (statusCell) {
+                statusCell.textContent = "Severe";
+                statusCell.classList.remove("status-running");
+                statusCell.classList.add("status-severe");
+            }
+        });
+
+        // Trigger another update after 7 seconds
+        setTimeout(changeStatusToSevere, 7000);
+    }
+}
+
+// function isEnded(){
+//             if (isGameOver == false){
+//             if (servers.every(server => server.status === "Severe")) {
+//             isGameOver = true;
+//             alert(`Game Over! Your final score is ${points} points.`);
+//             return; 
+//         } else {console.log(servers);}
+// }
+
+// }
+
+
+// Event listener for the "Terminate Instance" button
+document.getElementById("terminateButton").addEventListener("click", function () {
+    if (!isGameOver) {
+        const selectedInstanceId = document.querySelector('input[name="instance"]:checked');
+
+        if (selectedInstanceId) {
+            const instanceId = parseInt(selectedInstanceId.value);
+            const serverIndex = servers.findIndex(server => server.id === instanceId);
+
+            if (serverIndex !== -1) {
+                servers[serverIndex].status = "Terminating...";
+                updateRunningCountAndPoints();
+                const statusCell = document.getElementById(`status${instanceId}`);
+
+                // Check if the element exists before updating it
+                if (statusCell) {
+                    statusCell.textContent = "Terminating...";
+                    statusCell.classList.remove("status-running", "status-severe");
+                }
+
+                // Delay for 2 seconds, then remove the terminated server
+                setTimeout(() => {
+                    const tbody = document.querySelector('tbody');
+                    const rowToRemove = document.querySelector(`[value="${instanceId}"]`).closest('tr');
+
+                    if (rowToRemove) {
+                        tbody.removeChild(rowToRemove);
+
+                        // Remove the terminated server from the servers array
+                        servers.splice(serverIndex, 1);
+                    }
+
+                    // Add a random number of new servers
+                    const numNewServers = Math.floor(Math.random() * 4) + 1; // 1 to 4 new servers
+                    for (let i = 1; i <= numNewServers; i++) {
+                        const newServerId = servers.length + i;
+                        const newServer = {
+                            id: newServerId,
+                            instanceName: `Server ${newServerId}`,
+                            status: "Running"
+                        };
+
+                        servers.push(newServer);
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                            <td><input type="radio" name="instance" value="${newServer.id}"></td>
+                            <td id="instance${newServer.id}">${newServer.instanceName}</td>
+                            <td id="status${newServer.id}" class="status-${newServer.status.toLowerCase()}">${newServer.status}</td>
+                        `;
+                        tbody.appendChild(newRow);
+                    }
+                    updateRunningCountAndPoints();
+                }, 2000);
+            }
+        } else {
+            alert("Please select a server to terminate.");
+        }
+    }
+});
+
+
+        // Initial update of the running server count and table initialization
+        updateRunningCountAndPoints();
+        initializeTable();
+
+        // Schedule the first status change to "Severe" after 10 seconds
+        setTimeout(changeStatusToSevere, 5000);
+        // setInterval(isEnded, 1000);
+    </script>
+</body>
+</html>
